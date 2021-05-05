@@ -4,10 +4,10 @@
  </button>
 
  <span class="mr-2 d-none d-lg-inline ml-auto display-5 btn btn-block btn-secondary"> {{ App\User::find(Auth::id())->name }} </span>
- <a class="mr-2 d-none d-lg-inline ml-auto btn btn-info " style="text-decoration: none" href="#" data-toggle="modal" data-target="#logoutModal">
+ <a class="mr-2 d-none d-lg-inline ml-auto btn bg-gradient-primary text-white " style="text-decoration: none" href="#" data-toggle="modal" data-target="#logoutModal">
     Logout
 </a>
-<a class="mr-2 d-none d-lg-inline btn btn-info" style="text-decoration: none" href="{{ url('profile') }}">
+<a class="mr-2 d-none d-lg-inline btn bg-gradient-primary text-white " style="text-decoration: none" href="{{ url('profile') }}">
  Profile
 </a>
 

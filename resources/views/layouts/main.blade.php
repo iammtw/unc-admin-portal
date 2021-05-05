@@ -9,7 +9,7 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin Dashboard</title>
+    <title>UNC | Admin Portal</title>
     <link
   href="{{ url('vendor/fontawesome-free/css/all.min.css') }}"
       rel="stylesheet"
