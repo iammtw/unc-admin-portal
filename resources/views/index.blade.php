@@ -62,7 +62,7 @@
             <div
               class="h5 mb-0 text-center display-4 font-weight-bold text-gray-800"
             >
-             5
+             {{ App\Program::all()->count() }}
             </div>
           </div>
           <div class="col-auto">

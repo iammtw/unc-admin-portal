@@ -32,9 +32,18 @@
                 <td>{{ $program->credit_hours }}</td>
                 <td>{{ $program->duration }}</td>
                 <td>
-                    <a href="{{ url('programs/'.$program->id.'/view') }}" class="btn btn-info">View</a>
-                    <a href="{{ url('programs/'.$program->id.'/edit') }}" class="btn btn-success">Edit</a>
-                    <a href="{{ url('programs/'.$program->id.'/delete') }}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-danger">Delete</a>
+                    <a href="{{ url('programs/'.$program->id.'/view') }}" class="btn btn-info">
+                        <i class="fa fa-eye"></i> 
+                        View
+                    </a>
+                    <a href="{{ url('programs/'.$program->id.'/edit') }}" class="btn btn-success">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Edit
+                    </a>
+                    <a href="{{ url('programs/'.$program->id.'/delete') }}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-danger">
+                        <i class="fa fa-trash"></i> 
+                        Delete
+                    </a>
                 </td>
             
             </tr>
