@@ -1,14 +1,14 @@
 @extends('layouts.main')
 @section('content')
 
-    <h1 class="h3 mb-2 text-gray-800">Programs</h1>
+    <h1 class="h3 mb-2 text-gray-800">Students</h1>
     <div class="card shadow mb-4">
         @if (session('msg'))
             <span class=" mt-2 alert alert-danger"> {{ session('msg') }} </span>
         @endif
         <div class="card-header py-3">
-        <a href="{{ url('programs/add') }}" class="btn btn-primary" style="float:right"> <i class="fa fa-add"></i>  Add Program </a>
-        <h6 class="m-0 font-weight-bold text-primary">All Programs</h6>
+        <a href="{{ url('students/add') }}" class="btn btn-primary" style="float:right"> <i class="fa fa-add"></i>  Add Student </a>
+        <h6 class="m-0 font-weight-bold text-primary">All Students</h6>
     </div>
 
     <div class="card-body">
@@ -17,30 +17,40 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
             <tr>
-                <th>Program Name</th>
-                <th>Major</th>
-                <th>Credit Hours</th>
-                <th>Duration</th>
+                <th>Enrollment No.</th>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Nationality</th>
+                <th>Program</th>
+                <th>Enroll Date</th>
+                <th>Course Provider</th>
+                <th>Status</th>
+                <th>Approved</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($programs as $program)
+            @foreach ($students as $student)
             <tr>
-                <td>{{ $program->program_name }}</td>
-                <td>{{ $program->major }}</td>
-                <td>{{ $program->credit_hours }}</td>
-                <td>{{ $program->duration }}</td>
+                <td>{{ $student->registration_no }}</td>
+                <td>{{ $student->full_name }}</td>
+                <td>{{ $student->dob_day.'-'.$student->dob_month.'-'.$student->dob_year  }}</td>
+                <td>{{ $student->nationality }}</td>
+                <td>{{ App\Program::find($student->program_id)->program_name }}</td>
+                <td>{{ $student->enrolment_date }}</td>
+                <td>{{ $student->course_provider_id }}</td>
+                <td>{{ $student->status == 1 ? "Paid" : "unPaid" }}</td>
+                <td>{{ $student->approved == 1 ? "YES" : "No" }}</td>
                 <td>
-                    <a href="{{ url('programs/'.$program->id.'/view') }}" class="btn btn-info">
+                    <a href="{{ url('students/'.$student->id.'/view') }}" class="btn btn-sm btn-info">
                         <i class="fa fa-eye"></i> 
                         View
                     </a>
-                    <a href="{{ url('programs/'.$program->id.'/edit') }}" class="btn btn-success">
+                    <a href="{{ url('students/'.$student->id.'/edit') }}" class="btn btn-sm btn-success">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         Edit
                     </a>
-                    <a href="{{ url('programs/'.$program->id.'/delete') }}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-danger">
+                    <a href="{{ url('students/'.$student->id.'/delete') }}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-danger">
                         <i class="fa fa-trash"></i> 
                         Delete
                     </a>

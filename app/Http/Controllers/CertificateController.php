@@ -14,10 +14,6 @@ class CertificateController extends Controller
     }
 
     public function add(){
-        // $getLastNo = Certificate::orderBy('id','desc')->first()->certificate_no;
-        // $getOnlyNo = explode('CR',$getLastNo)[1];
-        // $getInteger = (double) $getOnlyNo;
-        // $newCertifcateNo = $getInteger++;
         return view('certificates.add');
     }
 
