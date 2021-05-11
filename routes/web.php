@@ -22,4 +22,10 @@ Route::post('/programs/{id}/edit','ProgramController@editInsert')->middleware('a
 Route::get('/programs/{id}/delete','ProgramController@delete')->middleware('auth');
 
 Route::get('/course-provider','CourseProviderController@index')->middleware('auth');
+Route::get('/course-provider/add','CourseProviderController@add')->middleware('auth');
+Route::post('/course-provider/add','CourseProviderController@insert')->middleware('auth');
+Route::get('/course-provider/{id}/view','CourseProviderController@view')->middleware('auth');
+Route::get('/course-provider/{id}/edit','CourseProviderController@edit')->middleware('auth');
+Route::post('/course-provider/{id}/edit','CourseProviderController@editInsert')->middleware('auth');
+Route::get('/course-provider/{id}/delete','CourseProviderController@delete')->middleware('auth');
 
