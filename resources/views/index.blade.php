@@ -14,7 +14,7 @@
             <div
               class="h5 mb-0 text-center display-4 font-weight-bold text-gray-800"
             >
-            5
+           {{ App\Student::all()->count() }}
             </div>
           </div>
           <div class="col-auto">
@@ -38,7 +38,7 @@
             <div
               class="h5 mb-0 text-center display-4 font-weight-bold text-gray-800"
             >
-             5
+            {{ App\Certificate::all()->count() }}
             </div>
           </div>
           <div class="col-auto">
@@ -86,7 +86,7 @@
             <div
               class="h5 mb-0 text-center display-4 font-weight-bold text-gray-800"
             >
-            5
+            {{ App\Course_provider::all()->count() }}
             </div>
           </div>
           <div class="col-auto">
