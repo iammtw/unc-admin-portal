@@ -36,7 +36,11 @@
                 <td>{{ $student->full_name }}</td>
                 <td>{{ $student->dob_day.'-'.$student->dob_month.'-'.$student->dob_year  }}</td>
                 <td>{{ $student->nationality }}</td>
-                <td>{{ App\Program::find($student->program_id)->program_name }}</td>
+                <td>
+                    <a href="{{ url('/programs/'.$student->program_id.'/view') }}">
+                        {{ App\Program::find($student->program_id)->program_name }}
+                    </a>
+                </td>
                 <td>{{ $student->enrolment_date }}</td>
                 <td>{{ $student->course_provider_id }}</td>
                 <td>{{ $student->status == 1 ? "Paid" : "unPaid" }}</td>
