@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Student;
 use App\Program;
 use App\User;
+use Response;
 
 class StudentController extends Controller
 {
@@ -102,6 +103,20 @@ class StudentController extends Controller
     public function delete($id){
         Student::find($id)->delete();
         return redirect('students')->with('msg','Successfully Deleted!');
+    }
+
+    public function forApi($reg_no){
+        $student = Student::where('registration_no',$reg_no)->first();
+        $program = Program::find($student->program_id);
+        $student->program = $program->program_name;
+        if($student != null){
+            return Response::json($student);
+        } else {
+            $error = array(
+                "error" => "Student not Found!"
+            );
+            return Response::json(json_encode($error));
+        }
     }
 
     

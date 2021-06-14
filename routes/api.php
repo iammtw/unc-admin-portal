@@ -7,3 +7,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('unc/{cert_no}', 'CertificateController@forApi');
+Route::get('unc/enroll/{reg_no}', 'StudentController@forApi');
