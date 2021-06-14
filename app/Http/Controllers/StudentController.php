@@ -109,6 +109,8 @@ class StudentController extends Controller
         $student = Student::where('registration_no',$reg_no)->first();
         $program = Program::find($student->program_id);
         $student->program = $program->program_name;
+        $student->major = $program->major;
+        $student->duration = $program->duration;
         if($student != null){
             return Response::json($student);
         } else {
