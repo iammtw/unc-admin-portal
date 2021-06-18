@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Certificate;
+use App\Student;
 use Response;
 
 class CertificateController extends Controller
@@ -55,7 +56,18 @@ class CertificateController extends Controller
     public function forApi($cert_no){
         $certificates = Certificate::where('certificate_no',$cert_no)->first();
         if($certificates != null){
-            return Response::json($certificates);
+           
+            $student = Student::where('registration_no',$certificates->registration_no)->first();
+             if($student != null) {
+                if($student->isactive == 1){
+                    return Response::json($certificates);
+                } else {
+                    $error = array("error" => "Certificate not Found!");
+                    return Response::json(json_encode($error));
+                }
+             } else {
+                return Response::json($certificates);
+             }
         } else {
             $error = array(
                 "error"=>"Certificate not Found!"

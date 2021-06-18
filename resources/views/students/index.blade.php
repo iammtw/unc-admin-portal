@@ -27,6 +27,7 @@
                 <th>Status</th>
                 <th>Approved</th>
                 <th>Actions</th>
+                <th>Activate/Deactivate</th>
             </tr>
             </thead>
             <tbody>
@@ -58,6 +59,13 @@
                         <i class="fa fa-trash"></i> 
                         Delete
                     </a>
+                </td>
+                <td>
+                    @if ($student->isactive == "1")
+                    <a href="{{ url('students/active/'.$student->id.'/0') }}" class="btn btn-sm btn-danger">DeActivate</a>
+                    @else
+                    <a href="{{ url('students/active/'.$student->id.'/1') }}" class="btn btn-sm btn-success">Activate</a> 
+                    @endif
                 </td>
             
             </tr>

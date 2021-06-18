@@ -40,3 +40,5 @@ Route::get('/course-provider/{id}/view','CourseProviderController@view')->middle
 Route::get('/course-provider/{id}/edit','CourseProviderController@edit')->middleware('auth');
 Route::post('/course-provider/{id}/edit','CourseProviderController@editInsert')->middleware('auth');
 Route::get('/course-provider/{id}/delete','CourseProviderController@delete')->middleware('auth');
+
+Route::get('students/active/{id}/{status}','StudentController@activate')->middleware('auth');

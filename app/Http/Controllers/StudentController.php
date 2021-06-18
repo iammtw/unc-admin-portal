@@ -105,13 +105,20 @@ class StudentController extends Controller
         return redirect('students')->with('msg','Successfully Deleted!');
     }
 
+    public function activate($id, $status){
+        $student = Student::find($id);
+        $student->isactive = $status;
+        $student->save();
+        return redirect('students')->with('msg','Successfully Updated!');
+    }
+
     public function forApi($reg_no){
-        $student = Student::where('registration_no',$reg_no)->first();
-        $program = Program::find($student->program_id);
-        $student->program = $program->program_name;
-        $student->major = $program->major;
-        $student->duration = $program->duration;
+        $student = Student::where('registration_no',$reg_no)->where('isactive','1')->first();
         if($student != null){
+            $program = Program::find($student->program_id);
+            $student->program = $program->program_name;
+            $student->major = $program->major;
+            $student->duration = $program->duration;
             return Response::json($student);
         } else {
             $error = array(
