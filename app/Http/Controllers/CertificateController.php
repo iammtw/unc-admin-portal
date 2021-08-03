@@ -56,18 +56,18 @@ class CertificateController extends Controller
     public function forApi($cert_no){
         $certificates = Certificate::where('certificate_no',$cert_no)->first();
         if($certificates != null){
-           
             $student = Student::where('registration_no',$certificates->registration_no)->first();
-             if($student != null) {
+            if($student != null) {
+                 $certificates->student_name = $student->full_name;
                 if($student->isactive == 1){
                     return Response::json($certificates);
                 } else {
                     $error = array("error" => "Certificate not Found!");
                     return Response::json(json_encode($error));
                 }
-             } else {
+            } else {
                 return Response::json($certificates);
-             }
+            }
         } else {
             $error = array(
                 "error"=>"Certificate not Found!"

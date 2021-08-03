@@ -18,7 +18,15 @@
                     @csrf
                     <div class="form-group">
                         <label for=""> Enrollment No </label>
-                        <input type="text" name="registration_no" value={{ $registration_no }} disabled required class="form-control" id="">
+                       <div class="row">
+                            <div class="col-md-11">
+                                <input type="text" name="registration_no" id='reg_no' value={{ $registration_no }} readonly required class="form-control" id="">
+                            </div>
+                            <div class="col-md-1">
+                                <a class="btn btn-success" id="edit" style="color:white"> Edit </a>
+                            </div>
+                        </div>
+                       
                     </div>
 
                     <div class="form-group">
@@ -87,6 +95,12 @@
         </div>
     </div>
 </div>
+
+<script>
+        document.getElementById('edit').addEventListener('click', ()=> {
+            document.getElementById('reg_no').readOnly = false;
+        })
+</script>
 
 @endsection
 

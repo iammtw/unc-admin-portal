@@ -30,6 +30,7 @@ class StudentController extends Controller
     }
 
     public function insert(Request $req){
+
         $day = date('d',strtotime($req->dob));
         $month = date('m',strtotime($req->dob));
         $year = date('Y',strtotime($req->dob));
@@ -44,7 +45,8 @@ class StudentController extends Controller
          }
 
         $Student = new Student;
-        $Student->registration_no = $registration_no;
+
+        $Student->registration_no = $req->registration_no;
         $Student->full_name = $req->full_name;
         $Student->dob_day = $day;
         $Student->dob_month = $month;
