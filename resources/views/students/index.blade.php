@@ -42,7 +42,7 @@
                         {{ App\Program::find($student->program_id)->program_name }}
                     </a>
                 </td>
-                <td>{{ $student->enrolment_date }}</td>
+                <td>{{ date('d-m-Y', strtotime($student->enrolment_date)) }}</td> 
                 <td>{{ $student->course_provider_id }}</td>
                 <td>{{ $student->status == 1 ? "Paid" : "unPaid" }}</td>
                 <td>{{ $student->approved == 1 ? "YES" : "No" }}</td>

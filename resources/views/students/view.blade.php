@@ -46,7 +46,7 @@
                             </tr>
                             <tr>
                                 <td>Enrollment Date</td>
-                                <td> {{ $student->enrolment_date  }}</td>
+                                <td>{{ date('d-m-Y', strtotime($student->enrolment_date)) }}</td>
                             </tr>
                             <tr>
                                 <td>Completion Date</td>

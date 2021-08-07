@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Certificate;
 use App\Student;
+use App\Program;
 use Response;
 
 class CertificateController extends Controller
@@ -55,10 +56,15 @@ class CertificateController extends Controller
 
     public function forApi($cert_no){
         $certificates = Certificate::where('certificate_no',$cert_no)->first();
+        $certificates->graduation_date = date('d-m-Y',$certificates->graduation_date);
         if($certificates != null){
             $student = Student::where('registration_no',$certificates->registration_no)->first();
             if($student != null) {
                  $certificates->student_name = $student->full_name;
+                 $program_name = Program::find($student->program_id)->program_name;
+                  if($program_name != null){
+                    $certificates->cert_name = $program_name;
+                  }
                 if($student->isactive == 1){
                     return Response::json($certificates);
                 } else {

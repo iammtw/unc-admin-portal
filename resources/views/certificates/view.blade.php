@@ -25,17 +25,26 @@
                                 @if ($user != null)
                                     <td> {{ $user->full_name }}</td>
                                 @else
-                                    <td> </td>
+                                    <td> Student Does't Exists </td>
+                                @endif
+                                
+                            </tr>
+                            <tr>
+                                <td><b>Certificate Name</b></td>
+                                @if ($user != null)
+                                    <td> {{ App\Program::find($user->program_id)->program_name }}</td>
+                                @else
+                                    <td> Student Does't Exists </td>
                                 @endif
                                 
                             </tr>
                             <tr>
                                 <td><b>Graduation Date</b></td>
-                                <td>{{ $certificate->graduation_date }}</td>
+                                <td>{{ date('d-m-Y', strtotime($certificate->graduation_date))  }}</td>
                             </tr>
                             <tr>
                                 <td><b>Status</b></td>
-                                <td>{{ $certificate->status }}</td>
+                                <td>{{ $certificate->status == '1' ? 'Active' : 'inActive' }}</td>
                             </tr>
                            
                           

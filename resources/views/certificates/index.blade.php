@@ -19,6 +19,7 @@
             <tr>
                 <th>Certificate #</th>
                 <th>Registration #</th>
+                <th>Certificate Name</th>
                 <th>Graduation Date</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -29,7 +30,13 @@
             <tr>
                 <td>{{ $certificate->certificate_no }}</td>
                 <td>{{ $certificate->registration_no }}</td>
-                <td>{{ $certificate->graduation_date }}</td>
+                <?php $student = App\Student::where('registration_no', $certificate->registration_no)->first(); ?>
+                @if ($student)
+                <td> {{ App\Program::find($student->program_id) == null ? 'not Found' : App\Program::find($student->program_id)->program_name}} </td>
+                @else
+                    <td> Student not exists </td>
+                @endif
+                <td>{{ date('d-m-Y', strtotime($certificate->graduation_date)) }}</td>
                 <td>{{ $certificate->status == 1 ? 'Active' : 'InActive' }}</td>
                 <td>
                     <a href="{{ url('certificates/'.$certificate->id.'/view') }}" class="btn btn-info">
