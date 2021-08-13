@@ -20,6 +20,16 @@ class CertificateController extends Controller
     }
 
     public function insert(Request $req){
+
+        $checkingCertificate = Certificate::where('certificate_no', $req->certificate_no)->first();
+        $checkingStudent = Student::where('registration_no', $req->registration_no)->first();
+        if($checkingCertificate != null){
+            return redirect()->back()->with('msg','Certificate Number Already Exists!');
+        }
+        if($checkingStudent == null){
+            return redirect()->back()->with('msg','Student Not Exists with this Registration Number!');
+        }
+
         $certificate = new Certificate;
         $certificate->certificate_no = $req->certificate_no;
         $certificate->registration_no = $req->registration_no;
@@ -40,6 +50,17 @@ class CertificateController extends Controller
     }
 
     public function editInsert(Request $req, $id){
+
+        $checkingStudent = Student::where('registration_no', $req->registration_no)->first();
+        if($checkingStudent == null){
+            return redirect()->back()->with('msg','Student Not Exists with this Registration Number!');
+        }
+        
+        $checkingCertificate = Certificate::where('certificate_no', $req->certificate_no)->where('id','!=',$id)->first();
+        if($checkingCertificate != null){
+            return redirect()->back()->with('msg','Certificate Number Already Exists!');
+        }      
+
         $certificate = Certificate::find($id);
         $certificate->certificate_no = $req->certificate_no;
         $certificate->registration_no = $req->registration_no;

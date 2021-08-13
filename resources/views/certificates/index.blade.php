@@ -19,6 +19,7 @@
             <tr>
                 <th>Certificate #</th>
                 <th>Registration #</th>
+                <th>Student Name</th>
                 <th>Certificate Name</th>
                 <th>Graduation Date</th>
                 <th>Status</th>
@@ -33,7 +34,9 @@
                 <?php $student = App\Student::where('registration_no', $certificate->registration_no)->first(); ?>
                 @if ($student)
                 <td> {{ App\Program::find($student->program_id) == null ? 'not Found' : App\Program::find($student->program_id)->program_name}} </td>
+                 <td>{{ $student->full_name }}</td>
                 @else
+                    <td> Student not exists </td>
                     <td> Student not exists </td>
                 @endif
                 <td>{{ date('d-m-Y', strtotime($certificate->graduation_date)) }}</td>
