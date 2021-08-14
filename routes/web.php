@@ -42,3 +42,4 @@ Route::post('/course-provider/{id}/edit','CourseProviderController@editInsert')-
 Route::get('/course-provider/{id}/delete','CourseProviderController@delete')->middleware('auth');
 
 Route::get('students/active/{id}/{status}','StudentController@activate')->middleware('auth');
+Route::get('students/detect-major/{id}','ProgramController@detectMajor');

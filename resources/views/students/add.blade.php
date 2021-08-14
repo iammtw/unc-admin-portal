@@ -46,7 +46,7 @@
 
                     <div class="form-group">
                         <label for=""> Program  </label>
-                        <select name="program_id" id="" class="form-control">
+                        <select name="program_id" id="program" class="form-control">
                             @foreach ($programs as $program)
                                 <option value={{ $program->id }}>{{ $program->program_name }}</option>
                             @endforeach
@@ -55,7 +55,7 @@
 
                     <div class="form-group">
                         <label for=""> Major </label>
-                        <input type="text" name="enrolment_major" required class="form-control" id="">
+                        <input type="text" name="enrolment_major" readonly id='major' required class="form-control" id="">
                     </div>
 
                     <div class="form-group">
@@ -97,9 +97,26 @@
 </div>
 
 <script>
+
         document.getElementById('edit').addEventListener('click', ()=> {
             document.getElementById('reg_no').readOnly = false;
         })
+
+        document.getElementById('program').addEventListener('change', ()=> {
+            const program_id = document.getElementById('program').value;
+            fetchMajor(program_id)
+        })
+
+        const fetchMajor = async (program_id) => {
+            fetch(`detect-major/${program_id}`)
+                .then((response)=> response.json())
+                .then((data)=>  document.getElementById('major').value = data.major);
+        }
+
+        const program_id = document.getElementById('program').value;
+        fetchMajor(program_id)
+
+
 </script>
 
 @endsection

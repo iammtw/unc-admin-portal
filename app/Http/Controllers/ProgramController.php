@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Program;
+use Response;
 
 class ProgramController extends Controller
 {
@@ -49,5 +50,17 @@ class ProgramController extends Controller
     public function delete($id){
         $program = Program::find($id)->delete();
         return redirect('programs')->with('msg','Successfully Deleted!');
+    }
+
+    public function detectMajor($id){
+        $program = Program::find($id);
+        if($program){
+            return Response::json($program);
+        } else {
+            $error = array(
+                "error" => "Student not Found!"
+            );
+            return Response::json(json_encode($error));
+        }
     }
 }

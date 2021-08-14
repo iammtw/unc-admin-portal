@@ -12,19 +12,23 @@ use Response;
 class StudentController extends Controller
 {
     public function index(){
-        $students = Student::all();
+        $students = Student::orderBy('id','DESC')->get();
         return view('students.index',compact('students'));
     }
 
     public function add(){
         $registration_no = null;
-        $getLastData = Student::orderBy('id','desc')->first()->registration_no;
-        if($getLastData == "NCL10947361013238"){
-            $registration_no = "NCL2095001";
-        }  else {
-            $getOnlyNo = (float) explode('NCL',$getLastData)[1];
-            $registration_no = "NCL".($getOnlyNo + 1);
-        }
+        // $getLastData = Student::orderBy('id','desc')->first()->registration_no;
+        
+        // if($getLastData == "NCL10947361013238"){
+        //     $registration_no = "NCL2095001";
+        // }  else {
+        //     $getOnlyNo = (float) explode('NCL',$getLastData)[1];
+        //     $registration_no = "NCL".($getOnlyNo + 1);
+        // }
+        $lastId = Student::orderBy('id','DESC')->first()->id;
+        $create_new = 2095001 + $lastId;
+        $registration_no = "NCL".$create_new;
         $programs = Program::all();
         return view('students.add',compact('programs','registration_no'));
     }
@@ -35,19 +39,25 @@ class StudentController extends Controller
         $month = date('m',strtotime($req->dob));
         $year = date('Y',strtotime($req->dob));
 
-        $registration_no = null;
-        $getLastData = Student::orderBy('id','desc')->first()->registration_no;
-         if($getLastData == "NCL10947361013238"){
-            $registration_no = "NCL2095001";
-         }  else {
-            $getOnlyNo = (float) explode('NCL',$getLastData)[1];
-            $registration_no = $getOnlyNo + 1;
-         }
-
-         $checkingRegNo = Student::where('registration_no',$req->registration_no)->first();
-         if($checkingRegNo != null){
+        $checkingRegNo = Student::where('registration_no',$req->registration_no)->first();
+        if($checkingRegNo != null){
             return redirect()->back()->with('msg','Registration Number Already Exists!');
-         }
+        }
+
+        // $registration_no = null;
+        // $getLastData = Student::orderBy('id','desc')->first()->registration_no;
+        
+        //  if($getLastData == "NCL10947361013238"){
+        //     $registration_no = 2095001+$lastId;
+        //  }  else {
+        //     $getOnlyNo = (float) explode('NCL',$getLastData)[1];
+        //     $registration_no = $getOnlyNo + 1;
+        //  }
+
+        // $lastId = Student::orderBy('id','DESC')->first()->id;
+        // $create_new = 2095001 + $lastId;
+        // $registration_no = "NCL".$create_new;
+         
 
         $Student = new Student;
         $Student->registration_no = $req->registration_no;
@@ -107,7 +117,10 @@ class StudentController extends Controller
     }
 
     public function delete($id){
-        Student::find($id)->delete();
+        $student = Student::find($id);
+        if($student){
+            $student->delete();
+        }
         return redirect('students')->with('msg','Successfully Deleted!');
     }
 
