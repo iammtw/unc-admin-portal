@@ -55,7 +55,7 @@
 
                     <div class="form-group">
                         <label for=""> Major </label>
-                        <input type="text" name="enrolment_major" readonly id='major' required class="form-control" id="">
+                        <input type="text" name="enrolment_major" id='major' required class="form-control" id="">
                     </div>
 
                     <div class="form-group">

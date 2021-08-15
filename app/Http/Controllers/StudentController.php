@@ -17,7 +17,7 @@ class StudentController extends Controller
     }
 
     public function add(){
-        $registration_no = null;
+       $registration_no = null;
         // $getLastData = Student::orderBy('id','desc')->first()->registration_no;
         
         // if($getLastData == "NCL10947361013238"){
@@ -34,7 +34,6 @@ class StudentController extends Controller
     }
 
     public function insert(Request $req){
-
         $day = date('d',strtotime($req->dob));
         $month = date('m',strtotime($req->dob));
         $year = date('Y',strtotime($req->dob));
@@ -94,12 +93,18 @@ class StudentController extends Controller
     }
 
     public function editInsert(Request $req, $id){
+        
+        $checkingRegNo = Student::where('registration_no',$req->registration_no)->first();
+        if($checkingRegNo != null){
+            return redirect()->back()->with('msg','Registration Number Already Exists!');
+        }
 
         $day = date('d',strtotime($req->dob));
         $month = date('m',strtotime($req->dob));
         $year = date('Y',strtotime($req->dob));
 
         $Student = Student::find($id);
+        $Student->registration_no = $req->registration_no;
         $Student->full_name = $req->full_name;
         $Student->dob_day = $day;
         $Student->dob_month = $month;
@@ -117,7 +122,7 @@ class StudentController extends Controller
     }
 
     public function delete($id){
-        $student = Student::find($id);
+         $student = Student::find($id);
         if($student){
             $student->delete();
         }

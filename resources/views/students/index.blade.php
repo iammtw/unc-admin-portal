@@ -23,10 +23,11 @@
                 <th>Nationality</th>
                 <th>Program</th>
                 <th>Enroll Date</th>
-                <th>Course Provider</th>
                 <th>Status</th>
                 <th>Approved</th>
-                <th>Actions</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>View</th>
                 <th>Activate/Deactivate</th>
             </tr>
             </thead>
@@ -43,22 +44,28 @@
                     </a>
                 </td>
                 <td>{{ date('d-m-Y', strtotime($student->enrolment_date)) }}</td> 
-                <td>{{ $student->course_provider_id }}</td>
+                
                 <td>{{ $student->status == 1 ? "Paid" : "unPaid" }}</td>
                 <td>{{ $student->approved == 1 ? "YES" : "No" }}</td>
                 <td>
-                    <a href="{{ url('students/'.$student->id.'/view') }}" class="btn btn-sm btn-info">
-                        <i class="fa fa-eye"></i> 
-                        View
-                    </a>
-                    <a href="{{ url('students/'.$student->id.'/edit') }}" class="btn btn-sm btn-success">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                     <a href="{{ url('students/'.$student->id.'/edit') }}" class="btn btn-sm btn-success">
+                       
                         Edit
                     </a>
-                    <a href="{{ url('students/'.$student->id.'/delete') }}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-danger">
-                        <i class="fa fa-trash"></i> 
+                </td>
+                <td>
+                      <a href="{{ url('students/'.$student->id.'/delete') }}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-danger">
+                       
                         Delete
                     </a>
+                </td>
+                <td>
+                    <a href="{{ url('students/'.$student->id.'/view') }}" class="btn btn-sm btn-info">
+                       
+                        View
+                    </a>
+                   
+                  
                 </td>
                 <td>
                     @if ($student->isactive == "1")

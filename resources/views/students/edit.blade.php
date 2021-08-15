@@ -18,7 +18,7 @@
                     @csrf
                     <div class="form-group">
                         <label for=""> Enrollment No </label>
-                        <input type="text" name="registration_no" value={{ $student->registration_no }} disabled required class="form-control" id="">
+                        <input type="text" name="registration_no" value={{ $student->registration_no }}  required class="form-control" id="">
                     </div>
 
                     <div class="form-group">
@@ -42,7 +42,7 @@
 
                     <div class="form-group">
                         <label for=""> Program  </label>
-                        <select name="program_id" id="" class="form-control">
+                        <select name="program_id" id="program" class="form-control">
                             <option value={{ $student->program_id }} selected>{{ App\Program::find($student->program_id)->program_name }} </option>
                             @foreach ($programs as $program)
                                 <option value={{ $program->id }} >{{ $program->program_name }}</option>
@@ -52,7 +52,7 @@
 
                     <div class="form-group">
                         <label for=""> Major </label>
-                        <input type="text" name="enrolment_major" required value={{ $student->enrolment_major }} class="form-control" id="">
+                        <input type="text" name="enrolment_major" id='major' required value={{ $student->enrolment_major }} class="form-control" id="">
                     </div>
 
                     <div class="form-group">
@@ -98,6 +98,25 @@
         </div>
     </div>
 </div>
+
+<script>
+
+        document.getElementById('program').addEventListener('change', ()=> {
+            const program_id = document.getElementById('program').value;
+            fetchMajor(program_id)
+        })
+
+        const fetchMajor = async (program_id) => {
+            fetch(`detect-major/${program_id}`)
+                .then((response)=> response.json())
+                .then((data)=>  document.getElementById('major').value = data.major);
+        }
+
+        const program_id = document.getElementById('program').value;
+        fetchMajor(program_id)
+
+
+</script>
 
 @endsection
 
