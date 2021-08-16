@@ -77,7 +77,7 @@ class CertificateController extends Controller
 
     public function forApi($cert_no){
         $certificates = Certificate::where('certificate_no',$cert_no)->first();
-        $certificates->graduation_date = date('d-m-Y',$certificates->graduation_date);
+        $certificates->graduation_date = date('d-m-Y',strtotime($certificates->graduation_date));
         if($certificates != null){
             $student = Student::where('registration_no',$certificates->registration_no)->first();
             if($student != null) {
